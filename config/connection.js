@@ -6,7 +6,7 @@ var connection = mysql.createConnection({
   port: 3306,
   user: "root",
   password: "root",
-  database: "burger_db"
+  database: "burgers_db"
 });
 
 // Make connection.
@@ -17,6 +17,15 @@ connection.connect(function(err) {
   }
   console.log("connected as id " + connection.threadId);
 });
-
+if (process.env.JAWSDB_URL) {
+ connection = mysql.createConnection(process.env.JAWSDB_URL);
+} else {
+  connection = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: 'hacktheplanet',
+    database: 'todoagain_db'
+  });
+};
 // Export connection for our ORM to use.
 module.exports = connection;
